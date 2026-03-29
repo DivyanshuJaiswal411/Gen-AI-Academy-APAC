@@ -1,0 +1,14 @@
+# Ignore local development artifacts and sensitive files
+pii_agent/.adk/
+pii_agent/__pycache__/
+venv/
+__pycache__/
+*.pyc
+*.sqlite
+.git/
+.env
+.DS_Store
+*.log
+node_modules/
+npm/
+*pyenv*/
