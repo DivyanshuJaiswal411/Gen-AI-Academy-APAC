@@ -29,11 +29,36 @@ This agent uses the **Google Agent Development Kit (ADK)** and a **SequentialAge
 
 The `pii_redactor_pro` gateway utilizes a sequential two-stage processing pipeline to ensure both high precision and absolute data neutrality:
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/DivyanshuJaiswal411/Gen-AI-Academy-APAC/main/Agent_Diagram.png" alt="PII Redactor Pro Sequential Agent Diagram" width="800">
-  <br>
-  <em>Figure 1: Sequential Agent Workflow for Zero-Trust Redaction</em>
-</p>
+graph TD
+    %% Define Node Styles
+    classDef user fill:#2d3436,stroke:#dfe6e9,stroke-width:2px,color:#fff;
+    classDef cloud fill:#2d3436,stroke:#dfe6e9,stroke-width:2px,color:#fff;
+    classDef agent fill:#1e272e,stroke:#dfe6e9,stroke-width:2px,color:#fff;
+    classDef external fill:#2d3436,stroke:#dfe6e9,stroke-width:2px,color:#fff;
+
+    %% Nodes
+    U[User]:::user
+    FF[Firebase Frontend]:::cloud
+    CR[Cloud Run Backend]:::cloud
+    RA[pii_redactor_pro <br/> Sequential Agent]:::agent
+    ID[pii_identifier <br/> Stage 1 Agent]:::agent
+    RE[pii_redactor <br/> Stage 2 Agent]:::agent
+    GW[PII Redactor Gateway]:::external
+
+    %% Flow
+    U --> FF
+    FF -- "REST API" --> CR
+    CR --> RA
+    
+    subgraph ADK_Orchestration [ADK Orchestration Layer]
+        RA --> ID
+        ID -- "Identify PII" --> RE
+    end
+
+    RE -- "Secure JSON Egress" --> GW
+
+    %% Styling lines
+    linkStyle default stroke:#dfe6e9,stroke-width:1px;
 
 1.  **PII Identifier (Deep Scan):** Gemini 2.5 Flash performs deep semantic reasoning on the input text to identify and categorize specific sensitive data entities (e.g., distinguishing between a generic Model ID and an Aadhaar number).
 2.  **PII Redactor (Neutralization):** Once identified, the data is transformed in-memory using consistent placeholders (like `[NAME_1]`, `[ID_1]`) and a structural PII map is generated for the final validated JSON output.
