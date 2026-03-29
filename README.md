@@ -25,6 +25,16 @@ This agent uses the **Google Agent Development Kit (ADK)** and a **SequentialAge
 
 ---
 
+graph LR
+    A[User Input] --> B{Zero-Trust Gateway}
+    subgraph "Google Cloud Run"
+    B --> C[ADK Logic Engine]
+    C --> D[Gemini 1.5/2.5 Flash]
+    D --> E[Pydantic Validation]
+    end
+    E --> F[Sanitized JSON Output]
+    F --> G[(Secure Downstream Systems)]
+
 ## 🛠️ Technical Stack
 - **AI Orchestration:** Google ADK (Agent Development Kit)
 - **Model:** Gemini 2.5 Flash (Low latency, high context)
