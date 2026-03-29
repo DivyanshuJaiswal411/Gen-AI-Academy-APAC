@@ -36,6 +36,17 @@ def extract_json(text: str) -> Optional[dict]:
     except:
         return None
 
+@app.get("/")
+async def root():
+    return {
+        "message": "Welcome to the Zero-Trust PII Redaction Gateway",
+        "endpoints": {
+            "redact": "/redact (POST)",
+            "health": "/health (GET)",
+            "docs": "/docs"
+        }
+    }
+
 @app.post("/redact", response_model=RedactionResponse)
 async def redact_pii(request: RedactionRequest):
     """
