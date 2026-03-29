@@ -35,7 +35,7 @@ The `pii_redactor_pro` gateway utilizes a sequential two-stage processing pipeli
   <em>Figure 1: Sequential Agent Workflow for Zero-Trust Redaction</em>
 </p>
 
-1.  **PII Identifier (Deep Scan):** Gemini 1.5/2.5 Flash performs deep semantic reasoning on the input text to identify and categorize specific sensitive data entities (e.g., distinguishing between a generic Model ID and an Aadhaar number).
+1.  **PII Identifier (Deep Scan):** Gemini 2.5 Flash performs deep semantic reasoning on the input text to identify and categorize specific sensitive data entities (e.g., distinguishing between a generic Model ID and an Aadhaar number).
 2.  **PII Redactor (Neutralization):** Once identified, the data is transformed in-memory using consistent placeholders (like `[NAME_1]`, `[ID_1]`) and a structural PII map is generated for the final validated JSON output.
 
 ---
