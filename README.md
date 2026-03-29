@@ -28,7 +28,8 @@ This agent uses the **Google Agent Development Kit (ADK)** and a **SequentialAge
 ## 🏗️ Agent Architecture: Sequential Redaction Flow
 
 The `pii_redactor_pro` gateway utilizes a sequential two-stage processing pipeline to ensure both high precision and absolute data neutrality:
----
+
+```mermaid
 graph TD
     %% Define Node Styles
     classDef user fill:#2d3436,stroke:#dfe6e9,stroke-width:2px,color:#fff;
@@ -59,7 +60,7 @@ graph TD
 
     %% Styling lines
     linkStyle default stroke:#dfe6e9,stroke-width:1px;
----
+```
 
 1.  **PII Identifier (Deep Scan):** Gemini 2.5 Flash performs deep semantic reasoning on the input text to identify and categorize specific sensitive data entities (e.g., distinguishing between a generic Model ID and an Aadhaar number).
 2.  **PII Redactor (Neutralization):** Once identified, the data is transformed in-memory using consistent placeholders (like `[NAME_1]`, `[ID_1]`) and a structural PII map is generated for the final validated JSON output.
