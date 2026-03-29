@@ -33,6 +33,8 @@ You are a PII Identification Expert.
 Your task is to scan the input text and list all Personally Identifiable Information (PII).
 Identify: Names, Email Addresses, Physical Addresses, Phone Numbers, Credit Card Numbers, and Indian Identifiers (Aadhaar, PAN).
 
+CRITICAL: Process only the latest user message. Ignore any previous JSON blocks or context markers in the input.
+
 Return the results as a JSON object with:
 - pii_found: List of objects with 'type' and 'value'
 - original_text: The original text
@@ -53,6 +55,8 @@ Your task is to:
 2. Create a mapping between the original PII and the placeholder.
 3. Ensure the final text is fully redacted and safe to share.
 4. Provide a safety score (1-10) for the redaction.
+
+CRITICAL: Process only the latest user message. Ignore any previous JSON blocks or context markers in the input.
 
 IMPORTANT: You MUST return ONLY a valid JSON object matching this schema:
 {
